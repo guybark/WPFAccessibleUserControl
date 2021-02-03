@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Resources;
+using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 
@@ -29,9 +30,16 @@ namespace WPFAccessibleUserControl
 
         protected override AutomationControlType GetAutomationControlTypeCore()
         {
-            // For this sample, consider this to have a known UIA ControlType of TabItem.
+            // For this sample, consider this to have a known UIA ControlType of Pane.
             // UIA itself will generate an appropriate LocalizedControlType to match.
-            return AutomationControlType.TabItem;
+            return AutomationControlType.Group;
+        }
+
+        // Given that the element is specifically being exposed to customers as a Group, 
+        // provide a localized, concise, and helpful name conveying its purpose.
+        protected override string GetNameCore()
+        {
+            return Resource1.CarerGroup;
         }
     }
 
@@ -56,8 +64,14 @@ namespace WPFAccessibleUserControl
         // screen reader can announce something more helpful to customers.
         protected override string GetLocalizedControlTypeCore()
         {
-            // Todo: Always localize this!
-            return "Building"; // This is a demo string.
+            return Resource1.BuildingControlType;
+        }
+
+        // Give the Building control a localized, concise, and helpful name conveying
+        // the purpose of the building.
+        protected override string GetNameCore()
+        {
+            return Resource1.TownHall;
         }
     }
 }
